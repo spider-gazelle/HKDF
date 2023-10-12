@@ -36,11 +36,11 @@ require "random"
 
 # Extract phase
 salt = Random.new.random_bytes(16)
-ikm = "input key material".bytes # Your input key material
+ikm = "input key material".to_slice # Your input key material
 prk = HKDF.extract(salt, ikm)
 
 # Expand phase
-info = "some context".bytes # Optional context and application-specific information
+info = "some context".to_slice # Optional context and application-specific information
 length = 32 # Desired length of the output keying material
 okm = HKDF.expand(prk, info, length)
 
